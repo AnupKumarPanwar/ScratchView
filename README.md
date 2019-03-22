@@ -1,6 +1,6 @@
 # ScratchView
 
-This prject is an extension to https://github.com/sharish/ScratchView
+This repo is an extension to https://github.com/sharish/ScratchView
 
   
 Demo Screen
