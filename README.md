@@ -6,9 +6,9 @@ This repo is an extension to https://github.com/sharish/ScratchView
 Demo Screen
 ------    
 
-|     ScratchImageView                |        ScratchTextView              | 
-| ----------------------------  | ----------------------------- | 
-| ![ScratchImageView][scratch_image] | ![ScratchTextView][scratch_text]   |
+|     ScratchImageView                |        ScratchTextView              |  ScratchImageView with custom pattern   |
+| ----------------------------  | ----------------------------- | ------------------------ |
+| ![ScratchImageView][scratch_image] | ![ScratchTextView][scratch_text]   | ![ScratchImageView][custom_pattern]   |
 
 ### Useful Methods
 
@@ -139,6 +139,6 @@ Customised By
 
 [scratch_image]:https://raw.githubusercontent.com/cooltechworks/ScratchView/2ec97c9a539d5976b68bf62ec07df8c727d72be2/screenshots/scratch_image_view_demo.gif
 [scratch_text]:https://raw.githubusercontent.com/cooltechworks/ScratchView/master/screenshots/scratch_text_view_demo.gif
-
+[custom_pattern]:https://raw.githubusercontent.com/AnupKumarPanwar/ScratchView/master/Screenshots/CustomPattern.gif
 
 
