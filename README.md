@@ -103,9 +103,7 @@ Attributes
 |     Attribute                |        Description              |          Values               | 
 | ----------------------------  | ----------------------------- |  ----------------------------- |
 | `app:overlay_image` | The pattern or image to cover the image/text.  | @drawable/scratch_card |
-| `app:tile_mode` | https://developer.android.com/reference/android/graphics/Shader.TileMode | * CLAMP 
-* MIRROR 
-* REPEAT|
+| `app:tile_mode` | https://developer.android.com/reference/android/graphics/Shader.TileMode | CLAMP / MIRROR / REPEAT|
 | `app:overlay_width` | Width of the overlay pattern | 300dp |
 | `app:overlay_height` | Height of the overlay pattern | 300dp |
 
