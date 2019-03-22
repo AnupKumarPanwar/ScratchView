@@ -120,7 +120,7 @@ repositories {
 }
 
 dependencies {
-    compile ''
+    implementation 'com.github.AnupKumarPanwar:ScratchView:1.0'
 }
 ```
 
