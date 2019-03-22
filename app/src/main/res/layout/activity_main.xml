@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:text="Surprise"/>
+
+    <com.anupkumarpanwar.scratchview.ScratchImageView
+        android:id="@+id/scratch_view"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:overlay_image="@drawable/scratch_card"
+        app:tile_mode="CLAMP"
+        app:overlay_width="300dp"
+        app:overlay_height="300dp"
+        android:src="@drawable/anup"
+        />
+
+</RelativeLayout>
