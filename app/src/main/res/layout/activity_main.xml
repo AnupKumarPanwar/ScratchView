@@ -7,13 +7,13 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
         android:gravity="center"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:text="Surprise"/>
+        android:src="@drawable/anup"/>
 
-    <com.anupkumarpanwar.scratchview.ScratchImageView
+    <com.anupkumarpanwar.scratchview.ScratchView
         android:id="@+id/scratch_view"
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -21,7 +21,6 @@
         app:tile_mode="CLAMP"
         app:overlay_width="300dp"
         app:overlay_height="300dp"
-        android:src="@drawable/anup"
         />
 
 </RelativeLayout>

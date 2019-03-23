@@ -13,12 +13,10 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -27,12 +25,12 @@ import android.view.View;
 import com.anupkumarpanwar.utils.BitmapUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-public class ScratchImageView extends AppCompatImageView {
+public class ScratchView extends View {
 
     public interface IRevealListener {
-        public void onRevealed(ScratchImageView scratchImageView);
+        public void onRevealed(ScratchView scratchView);
 
-        public void onRevealPercentChangedListener(ScratchImageView scratchImageView, float percent);
+        public void onRevealPercentChangedListener(ScratchView scratchView, float percent);
     }
 
     /**
@@ -105,21 +103,21 @@ public class ScratchImageView extends AppCompatImageView {
     private int mThreadCount = 0;
 
 
-    public ScratchImageView(Context context) {
+    public ScratchView(Context context) {
         super(context);
         this.mContext = context;
         init();
     }
 
 
-    public ScratchImageView(Context context, AttributeSet attrs) {
+    public ScratchView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
         this.attrs = attrs;
         init();
     }
 
-    public ScratchImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ScratchView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
         this.attrs = attrs;
@@ -133,7 +131,7 @@ public class ScratchImageView extends AppCompatImageView {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void init() {
 
-       mTouchPath = new Path();
+        mTouchPath = new Path();
 
         mErasePaint = new Paint();
         mErasePaint.setAntiAlias(true);
@@ -151,16 +149,16 @@ public class ScratchImageView extends AppCompatImageView {
         mErasePath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 
-        TypedArray arr = mContext.obtainStyledAttributes(attrs, R.styleable.ScratchImageView,
+        TypedArray arr = mContext.obtainStyledAttributes(attrs, R.styleable.ScratchView,
                 styleAttr, 0);
 
-        int overlayImage = arr.getResourceId(R.styleable.ScratchImageView_overlay_image, R.drawable.ic_scratch_pattern);
+        int overlayImage = arr.getResourceId(R.styleable.ScratchView_overlay_image, R.drawable.ic_scratch_pattern);
 
-        float overlayWidth = arr.getDimension(R.styleable.ScratchImageView_overlay_width, 1000);
-        float overlayHeight = arr.getDimension(R.styleable.ScratchImageView_overlay_height, 1000);
+        float overlayWidth = arr.getDimension(R.styleable.ScratchView_overlay_width, 1000);
+        float overlayHeight = arr.getDimension(R.styleable.ScratchView_overlay_height, 1000);
 
 
-        String tileMode = arr.getString(R.styleable.ScratchImageView_tile_mode);
+        String tileMode = arr.getString(R.styleable.ScratchView_tile_mode);
 
         Bitmap scratchBitmap = BitmapFactory.decodeResource(getResources(), overlayImage);
         scratchBitmap = Bitmap.createScaledBitmap(scratchBitmap, (int) overlayWidth, (int) overlayHeight, false);
@@ -235,7 +233,7 @@ public class ScratchImageView extends AppCompatImageView {
      */
     public void clear() {
 
-        int[] bounds = getImageBounds();
+        int[] bounds = getViewBounds();
         int left = bounds[0];
         int top = bounds[1];
         int right = bounds[2];
@@ -352,7 +350,7 @@ public class ScratchImageView extends AppCompatImageView {
 
         if (!isRevealed() && mRevealListener != null) {
 
-            int[] bounds = getImageBounds();
+            int[] bounds = getViewBounds();
             int left = bounds[0];
             int top = bounds[1];
             int width = bounds[2] - left;
@@ -394,12 +392,12 @@ public class ScratchImageView extends AppCompatImageView {
                         mRevealPercent = percentRevealed;
 
                         if (oldValue != percentRevealed) {
-                            mRevealListener.onRevealPercentChangedListener(ScratchImageView.this, percentRevealed);
+                            mRevealListener.onRevealPercentChangedListener(ScratchView.this, percentRevealed);
                         }
 
                         // if now revealed.
                         if (isRevealed()) {
-                            mRevealListener.onRevealed(ScratchImageView.this);
+                            mRevealListener.onRevealed(ScratchView.this);
                         }
                     }
                 }
@@ -408,71 +406,12 @@ public class ScratchImageView extends AppCompatImageView {
         }
     }
 
-    public int[] getImageBounds() {
-
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
-
-        int vwidth = getWidth() - paddingLeft - paddingRight;
-        int vheight = getHeight() - paddingBottom - paddingTop;
-
-        int centerX = vwidth/2;
-        int centerY = vheight/2;
-
-
-        Drawable drawable = getDrawable();
-        Rect bounds = drawable.getBounds();
-
-        int width = drawable.getIntrinsicWidth();
-        int height = drawable.getIntrinsicHeight();
-
-        if(width <= 0) {
-            width = bounds.right - bounds.left;
-        }
-
-        if(height <= 0) {
-            height = bounds.bottom - bounds.top;
-        }
-
-        int left;
-        int top;
-
-        if(height > vheight) {
-            height = vheight;
-        }
-
-        if(width > vwidth) {
-            width = vwidth;
-        }
-
-
-        ScaleType scaleType = getScaleType();
-
-        switch (scaleType) {
-            case FIT_START:
-                left = paddingLeft;
-                top = centerY - height / 2;
-                break;
-            case FIT_END:
-                left = vwidth - paddingRight - width;
-                top = centerY - height / 2;
-                break;
-            case CENTER:
-                left = centerX - width / 2;
-                top = centerY - height / 2;
-                break;
-            default:
-                left = paddingLeft;
-                top = paddingTop;
-                width = vwidth;
-                height = vheight;
-                break;
-
-        }
-
-        return new int[] {left, top, left + width, top + height};
+    public int[] getViewBounds() {
+        int left = 0;
+        int top = 0;
+        int width = getWidth();
+        int height = getHeight();
+        return new int[]{left, top, left + width, top + height};
     }
 
 }

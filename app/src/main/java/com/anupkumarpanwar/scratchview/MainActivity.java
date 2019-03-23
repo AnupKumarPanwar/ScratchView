@@ -8,7 +8,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    ScratchImageView scratchImageView;
+    ScratchView scratchView;
+    boolean revealed = false;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -16,18 +17,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        scratchImageView = findViewById(R.id.scratch_view);
-        scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
+        scratchView = findViewById(R.id.scratch_view);
+        scratchView.setRevealListener(new ScratchView.IRevealListener() {
             @Override
-            public void onRevealed(ScratchImageView scratchImageView) {
+            public void onRevealed(ScratchView scratchView) {
                 Toast.makeText(getApplicationContext(), "Image reveled", Toast.LENGTH_LONG).show();;
             }
 
             @Override
-            public void onRevealPercentChangedListener(ScratchImageView scratchImageView, float percent) {
-                if (percent>=0.5) {
-                    Toast.makeText(getApplicationContext(), "Image reveled", Toast.LENGTH_LONG).show();;
-                    scratchImageView.reveal();
+            public void onRevealPercentChangedListener(ScratchView scratchView, float percent) {
+                if (percent>=0.5 && ! revealed) {
+                    Toast.makeText(getApplicationContext(), "Revealed", Toast.LENGTH_LONG).show();;
+                    revealed = true;
                 }
             }
         });
