@@ -4,12 +4,12 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     ScratchView scratchView;
-    boolean revealed = false;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -21,14 +21,13 @@ public class MainActivity extends AppCompatActivity {
         scratchView.setRevealListener(new ScratchView.IRevealListener() {
             @Override
             public void onRevealed(ScratchView scratchView) {
-                Toast.makeText(getApplicationContext(), "Image reveled", Toast.LENGTH_LONG).show();;
+                Toast.makeText(getApplicationContext(), "Reveled", Toast.LENGTH_LONG).show();;
             }
 
             @Override
             public void onRevealPercentChangedListener(ScratchView scratchView, float percent) {
-                if (percent>=0.5 && ! revealed) {
-                    Toast.makeText(getApplicationContext(), "Revealed", Toast.LENGTH_LONG).show();;
-                    revealed = true;
+                if (percent>=0.5) {
+                    Log.d("Reveal Percentage", "onRevealPercentChangedListener: " + String.valueOf(percent));
                 }
             }
         });
