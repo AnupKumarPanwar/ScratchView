@@ -1,41 +1,35 @@
 # ScratchView
 
-This repo is an extension to https://github.com/sharish/ScratchView
+This repo is build over https://github.com/sharish/ScratchView
 
   
 Demo Screen
 ------    
 
-|     ScratchImageView                |        ScratchTextView              | 
-| ----------------------------  | ----------------------------- | 
-| ![ScratchImageView][scratch_image] | ![ScratchTextView][scratch_text]   |
+![](https://raw.githubusercontent.com/AnupKumarPanwar/ScratchView/master/Screenshots/ScratchView.gif)
 
-### Custom pattern for scratch view
-![](https://raw.githubusercontent.com/AnupKumarPanwar/ScratchView/master/Screenshots/CustomPattern.gif)
 
 ### Useful Methods
-
-Both the views have following three methods which are useful to reveal or determine whether revealed and listener during revealing the hidden text/image.
 
 * ```isRevealed()``` - tells whether the text/image has been revealed.
 * ```reveal()``` - reveals the image/text if not revealed yet.
 * ```setRevealListener(IRevealListener)``` - a callback listener interface which gets called back when user reveals the text/image
 through onReveal() method.
 
+
 Usage
 --------
 
-### ScratchImageView
+ScratchView acts as an overlay over other views. Scratching the view makes it transparent so that the views below it are visible. Wrap all the layers in a RelativeLayout and put ScratchView above it.
+
 
 ##### XML
 
 ```xml
-<com.cooltechworks.views.ScratchImageView
-  android:id="@+id/sample_image"
+<com.anupkumarpanwar.scratchview.ScratchView
+  android:id="@+id/scratch_view"
   android:layout_width="300dp"
   android:layout_height="300dp"
-  android:background="@android:color/white"
-  android:src="@drawable/img_sample2"
   app:overlay_image="@drawable/scratch_card"
   app:tile_mode="CLAMP"
   app:overlay_width="300dp"
@@ -47,59 +41,54 @@ Usage
 ##### JAVA
 
 ```java
-ScratchImageView scratchImageView = new ScratchImageView(this);
+ScratchView scratchView = findViewById(R.id.scratch_view);
+        scratchView.setRevealListener(new ScratchView.IRevealListener() {
+            @Override
+            public void onRevealed(ScratchView scratchView) {
+                Toast.makeText(getApplicationContext(), "Reveled", Toast.LENGTH_LONG).show();;
+            }
 
-scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
-    @Override
-    public void onRevealed(ScratchImageView tv) {
-        // on reveal
-    }
-
-    @Override
-    public void onRevealPercentChangedListener(ScratchImageView siv, float percent) {
-        // on image percent reveal
-    }
-});
+            @Override
+            public void onRevealPercentChangedListener(ScratchView scratchView, float percent) {
+                if (percent>=0.5) {
+                    Log.d("Reveal Percentage", "onRevealPercentChangedListener: " + String.valueOf(percent));
+                }
+            }
+        });
 ```
 
-### ScratchTextView
 
-##### XML
+Example
+--------
 
 ```xml
-<com.cooltechworks.views.ScratchTextView
-  android:layout_width="300dp"
-  android:layout_height="300dp"
-  android:gravity="center|end"
-  android:text="@string/flat_200"
-  android:textSize="15sp"
-  android:textStyle="bold"
-  app:overlay_image="@drawable/scratch_card"
-  app:tile_mode="CLAMP"
-  app:overlay_width="300dp"
-  app:overlay_height="300dp"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/anup"/>
+
+    <com.anupkumarpanwar.scratchview.ScratchView
+        android:id="@+id/scratch_view"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:overlay_image="@drawable/scratch_card"
+        app:tile_mode="CLAMP"
+        app:overlay_width="300dp"
+        app:overlay_height="300dp"
+        />
+
+</RelativeLayout>
 
 ```
-
-##### JAVA
-
-```java
-ScratchTextView scratchTextView = new ScratchTextView(this);
-
-scratchTextView.setRevealListener(new ScratchTextView.IRevealListener() {
-    @Override
-    public void onRevealed(ScratchTextView tv) {
-        //on reveal
-    }
-
-
-    @Override
-    public void onRevealPercentChangedListener(ScratchTextView stv, float percent) {
-        // on text percent reveal
-    }
-});
-```
-
 
 Attributes
 --------
@@ -111,7 +100,7 @@ Attributes
 | `app:overlay_height` | Height of the overlay pattern | 300dp |
 
 
-Adding to your project
+Installation
 ------------------------
 
 - Add the following configuration in your build.gradle file.
@@ -130,17 +119,4 @@ dependencies {
 Developed By
 ------------
 
-* Harish Sridharan - <harish.sridhar@gmail.com>
-
-
-Customised By
-------------
-
 * Anup Kumar Panwar - <1anuppanwar@gmail.com>
-
-
-
-[scratch_image]:https://raw.githubusercontent.com/cooltechworks/ScratchView/2ec97c9a539d5976b68bf62ec07df8c727d72be2/screenshots/scratch_image_view_demo.gif
-[scratch_text]:https://raw.githubusercontent.com/cooltechworks/ScratchView/master/screenshots/scratch_text_view_demo.gif
-
-
