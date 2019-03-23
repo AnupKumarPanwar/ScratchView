@@ -17,7 +17,6 @@
         android:id="@+id/scratch_view"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:overlay_image="@drawable/scratch_card"
         app:tile_mode="CLAMP"
         app:overlay_width="300dp"
         app:overlay_height="300dp"

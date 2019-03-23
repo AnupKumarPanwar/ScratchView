@@ -159,6 +159,9 @@ public class ScratchView extends View {
 
 
         String tileMode = arr.getString(R.styleable.ScratchView_tile_mode);
+        if (tileMode == null) {
+            tileMode = "CLAMP";
+        }
 
         Bitmap scratchBitmap = BitmapFactory.decodeResource(getResources(), overlayImage);
         scratchBitmap = Bitmap.createScaledBitmap(scratchBitmap, (int) overlayWidth, (int) overlayHeight, false);
