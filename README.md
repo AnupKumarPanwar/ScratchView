@@ -112,7 +112,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.AnupKumarPanwar:ScratchView:1.0'
+    implementation 'com.github.AnupKumarPanwar:ScratchView:1.2'
 }
 ```
 
