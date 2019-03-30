@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
     android:gravity="center"
-    tools:context=".MainActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
     <ImageView
-        android:gravity="center"
+        android:layout_centerInParent="true"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/anup"/>
+        android:gravity="center"
+        android:src="@drawable/anup" />
 
     <com.anupkumarpanwar.scratchview.ScratchView
+        android:layout_centerInParent="true"
         android:id="@+id/scratch_view"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:tile_mode="CLAMP"
-        app:overlay_width="300dp"
         app:overlay_height="300dp"
-        />
+        app:overlay_width="300dp"
+        app:overlay_image="@drawable/scratch_card"
+        app:tile_mode="CLAMP" />
+
+    <Button
+        android:id="@+id/mask"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="MASK" />
 
 </RelativeLayout>

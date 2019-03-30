@@ -102,6 +102,8 @@ public class ScratchView extends View {
      */
     private int mThreadCount = 0;
 
+    Bitmap scratchBitmap;
+
 
     public ScratchView(Context context) {
         super(context);
@@ -163,7 +165,7 @@ public class ScratchView extends View {
             tileMode = "CLAMP";
         }
 
-        Bitmap scratchBitmap = BitmapFactory.decodeResource(getResources(), overlayImage);
+        scratchBitmap = BitmapFactory.decodeResource(getResources(), overlayImage);
         scratchBitmap = Bitmap.createScaledBitmap(scratchBitmap, (int) overlayWidth, (int) overlayHeight, false);
         mDrawable = new BitmapDrawable(getResources(), scratchBitmap);
 
@@ -179,7 +181,6 @@ public class ScratchView extends View {
                 break;
             default:
                 mDrawable.setTileModeXY(Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-
         }
 
     }
@@ -220,7 +221,6 @@ public class ScratchView extends View {
         super.onDraw(canvas);
         canvas.drawBitmap(mScratchBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath(mErasePath, mErasePaint);
-
     }
 
     private void touch_start(float x, float y) {
@@ -296,8 +296,14 @@ public class ScratchView extends View {
         clear();
     }
 
-    private void touch_up() {
+    public void mask() {
+        clear();
+        mRevealPercent = 0;
+        mCanvas.drawBitmap(scratchBitmap, 0, 0, mBitmapPaint);
+        invalidate();
+    }
 
+    private void touch_up() {
         drawPath();
     }
 
@@ -350,9 +356,7 @@ public class ScratchView extends View {
     }
 
     private void checkRevealed() {
-
         if (!isRevealed() && mRevealListener != null) {
-
             int[] bounds = getViewBounds();
             int left = bounds[0];
             int top = bounds[1];
