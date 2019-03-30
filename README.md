@@ -1,5 +1,8 @@
 # ScratchView
 
+[![](https://jitpack.io/v/AnupKumarPanwar/ScratchView.svg)](https://jitpack.io/#AnupKumarPanwar/ScratchView)
+
+
 This repo is build over https://github.com/sharish/ScratchView
 
   
