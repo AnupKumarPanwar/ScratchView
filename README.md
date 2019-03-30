@@ -11,9 +11,10 @@ Demo Screen
 
 ### Useful Methods
 
-* ```isRevealed()``` - tells whether the text/image has been revealed.
-* ```reveal()``` - reveals the image/text if not revealed yet.
-* ```setRevealListener(IRevealListener)``` - a callback listener interface which gets called back when user reveals the text/image
+* ```isRevealed()``` - tells whether the view has been revealed.
+* ```reveal()``` - reveals the view if not revealed yet.
+* ```mask()``` - masks the view again and removes the existing scratches.
+* ```setRevealListener(IRevealListener)``` - a callback listener interface which gets called back when user reveals the view
 through onReveal() method.
 
 
@@ -94,7 +95,7 @@ Attributes
 --------
 |     Attribute                |        Description              |          Values               | 
 | ----------------------------  | ----------------------------- |  ----------------------------- |
-| `app:overlay_image` | The pattern or image to cover the image/text.  | @drawable/scratch_card |
+| `app:overlay_image` | The pattern or image to cover the view.  | @drawable/scratch_card |
 | `app:tile_mode` | https://developer.android.com/reference/android/graphics/Shader.TileMode | CLAMP / MIRROR / REPEAT|
 | `app:overlay_width` | Width of the overlay pattern | 300dp |
 | `app:overlay_height` | Height of the overlay pattern | 300dp |
