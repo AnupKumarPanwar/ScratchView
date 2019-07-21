@@ -12,7 +12,7 @@ Demo Screen
 ![](https://raw.githubusercontent.com/AnupKumarPanwar/ScratchView/master/Screenshots/ScratchView.gif)
 
 
-### Useful Methods
+### Methods
 
 * ```isRevealed()``` - tells whether the view has been revealed.
 * ```reveal()``` - reveals the view if not revealed yet.
