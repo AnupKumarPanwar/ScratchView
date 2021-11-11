@@ -1,7 +1,6 @@
 package com.anupkumarpanwar.scratchview;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,6 +8,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
+import android.graphics.Color;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.Shader;
@@ -16,13 +16,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
+import android.graphics.Bitmap;
+import java.nio.ByteBuffer;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-
 import com.anupkumarpanwar.utils.BitmapUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -41,6 +42,7 @@ public class ScratchView extends View {
     private AttributeSet attrs;
     private int styleAttr;
     private View view;
+    private Bitmap mmbre;
 
     public static final float STROKE_WIDTH = 12f;
 
@@ -106,25 +108,10 @@ public class ScratchView extends View {
     Bitmap scratchBitmap;
 
 
-    public ScratchView(Context context) {
+    public ScratchView(Context context, Bitmap bitmap) {
         super(context);
         this.mContext = context;
-        init();
-    }
-
-
-    public ScratchView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        this.mContext = context;
-        this.attrs = attrs;
-        init();
-    }
-
-    public ScratchView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        this.mContext = context;
-        this.attrs = attrs;
-        this.styleAttr = defStyleAttr;
+        mmbre = bitmap;
         init();
     }
 
@@ -151,26 +138,11 @@ public class ScratchView extends View {
 
         mErasePath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-
-        TypedArray arr = mContext.obtainStyledAttributes(attrs, R.styleable.ScratchView,
-                styleAttr, 0);
-
-        int overlayImage = arr.getResourceId(R.styleable.ScratchView_overlay_image, R.drawable.ic_scratch_pattern);
-
-        float overlayWidth = arr.getDimension(R.styleable.ScratchView_overlay_width, 1000);
-        float overlayHeight = arr.getDimension(R.styleable.ScratchView_overlay_height, 1000);
-
-
-        String tileMode = arr.getString(R.styleable.ScratchView_tile_mode);
-        if (tileMode == null) {
-            tileMode = "CLAMP";
-        }
-        scratchBitmap = BitmapFactory.decodeResource(getResources(), overlayImage);
-        if (scratchBitmap == null) {
-            scratchBitmap = drawableToBitmap(ContextCompat.getDrawable(getContext(), overlayImage));
-        }
+        float overlayWidth = 1000;
+        float overlayHeight = 1000;
+        scratchBitmap = mmbre;
         scratchBitmap = Bitmap.createScaledBitmap(scratchBitmap, (int) overlayWidth, (int) overlayHeight, false);
-        mDrawable = new BitmapDrawable(getResources(), scratchBitmap);
+        mDrawable = new BitmapDrawable(mContext.getResources(), scratchBitmap);
 
         switch (tileMode) {
             case "REPEAT":
@@ -207,8 +179,8 @@ public class ScratchView extends View {
         Rect rect = new Rect(0, 0, getWidth(), getHeight());
         mDrawable.setBounds(rect);
 
-        int startGradientColor = ContextCompat.getColor(getContext(), R.color.scratch_start_gradient);
-        int endGradientColor = ContextCompat.getColor(getContext(), R.color.scratch_end_gradient);
+        int startGradientColor = Color.parseColor("#e5e5e5");
+        int endGradientColor = Color.parseColor("#cccccc");
 
 
         mGradientBgPaint.setShader(new LinearGradient(0, 0, 0, getHeight(), startGradientColor, endGradientColor, Shader.TileMode.MIRROR));
