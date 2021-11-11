@@ -63,7 +63,8 @@ public class ScratchView extends View {
      * Path holding the erasing path done by the user.
      */
     private Path mErasePath;
-
+    private float overlayWidth;
+    private float overlayHeight;
     /**
      * Path to indicate where the user have touched.
      */
@@ -108,10 +109,12 @@ public class ScratchView extends View {
     Bitmap scratchBitmap;
 
 
-    public ScratchView(Context context, Bitmap bitmap) {
+    public ScratchView(Context context, Bitmap bitmap, float bruoverlayHeight, float bruoverlayWidth) {
         super(context);
         this.mContext = context;
         mmbre = bitmap;
+        overlayWidth = bruoverlayHeight;
+        overlayHeight = bruoverlayWidth;
         init();
     }
 
@@ -138,8 +141,6 @@ public class ScratchView extends View {
 
         mErasePath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-        float overlayWidth = 1000;
-        float overlayHeight = 1000;
         scratchBitmap = mmbre;
         scratchBitmap = Bitmap.createScaledBitmap(scratchBitmap, (int) overlayWidth, (int) overlayHeight, false);
         mDrawable = new BitmapDrawable(mContext.getResources(), scratchBitmap);
