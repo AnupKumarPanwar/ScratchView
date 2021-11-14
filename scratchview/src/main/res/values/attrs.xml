@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScratchView">
+        <attr name="overlay_image" format="reference" />
+        <attr name="tile_mode" format="string" />
+        <attr name="overlay_width" format="dimension" />
+        <attr name="overlay_height" format="dimension" />
+    </declare-styleable>
+</resources>
