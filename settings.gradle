@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 rootProject.name = "Scratchview Demo"
 include ':app'
 include ':scratchview'
+include ':Library'
