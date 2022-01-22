@@ -107,14 +107,22 @@ Attributes
 Installation
 ------------------------
 
-- Add the following configuration in your build.gradle file.
+- Add the following configuration in your `settings.gradle` file.
 
 ```gradle
-repositories {
-    jcenter()
-    maven { url "https://jitpack.io" }
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        ...
+        maven { url "https://jitpack.io" }
+        ...
+    }
 }
+```
 
+- Add the dependency to your `build.gradle` (app level).
+
+```gradle
 dependencies {
     implementation 'com.github.AnupKumarPanwar:ScratchView:1.9'
 }
@@ -124,3 +132,4 @@ Developed By
 ------------
 
 * Anup Kumar Panwar - <1anuppanwar@gmail.com>
+  https://www.linkedin.com/in/anupkumarpanwar/
