@@ -335,7 +335,7 @@ public class ScratchView extends View {
     }
 
     public boolean isRevealed() {
-        return mRevealPercent >= 0.50;
+        return mRevealPercent >= 0.33;
     }
 
     private void checkRevealed() {

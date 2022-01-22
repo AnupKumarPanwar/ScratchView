@@ -64,8 +64,8 @@ public class BitmapUtils {
         int len = array.length;
         int count = 0;
 
-        for (int i = 0; i < len; i++) {
-            if (array[i] == 0) {
+        for (byte b : array) {
+            if (b == 0) {
                 count++;
             }
         }
