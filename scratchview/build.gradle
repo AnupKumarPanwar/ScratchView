@@ -41,7 +41,7 @@ afterEvaluate {
                 from components.release
                 groupId = "com.anupkumarpanwar"
                 artifactId = "scratchview"
-                version = '1.9'
+                version = '1.9.1'
             }
         }
     }
