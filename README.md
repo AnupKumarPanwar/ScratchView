@@ -108,7 +108,7 @@ dependencyResolutionManagement {
 
 ```gradle
 dependencies {
-    implementation 'com.github.AnupKumarPanwar:ScratchView:2.0.1'
+    implementation 'com.github.AnupKumarPanwar:ScratchView:2.0.2'
 }
 ```
 

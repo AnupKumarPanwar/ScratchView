@@ -43,7 +43,7 @@ afterEvaluate {
                 from components.findByName('release')
                 groupId = "com.anupkumarpanwar"
                 artifactId = "scratchview"
-                version = '2.0.1'
+                version = '2.0.2'
             }
         }
     }
